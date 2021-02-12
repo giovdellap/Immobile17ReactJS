@@ -5,6 +5,7 @@ import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function login(email, password) {
 	return function (dispatch) {
+		console.log("action login");
 		dispatch(beginApiCall());
 		return userApi
 			.sendLogin(email, password)

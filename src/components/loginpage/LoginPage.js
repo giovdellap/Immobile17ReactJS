@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import * as userActions from "../../redux/actions/userActions";
 import * as errorActions from "../../redux/actions/errorActions";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { OverlayTrigger, Button, Dropdown, Tooltip } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 import { bindActionCreators } from "redux";
 
 class LoginPage extends React.Component {
 	componentDidMount() {
-		const { error, actions } = this.props;
+		const { user, error, actions } = this.props;
 	}
 
 	handleSubmit = (event) => {
@@ -19,24 +19,25 @@ class LoginPage extends React.Component {
 	};
 
 	render() {
-		return (
-			<>
-				{typeof this.props.error === "undefined" ? (
-					<LoginForm onSubmit={this.props.handleSubmit} />
-				) : (
-					<LoginForm
-						error={this.props.error}
-						onSubmit={this.props.handleSubmit}
-					/>
-				)}
-			</>
-		);
+		if (typeof this.props.user !== "undefined") {
+			return <Redirect to="/homepage" />;
+		} else if (typeof this.props.error === "undefined") {
+			return <LoginForm onSubmit={this.handleSubmit} />;
+		} else {
+			return (
+				<LoginForm
+					error={this.props.error}
+					onSubmit={this.handleSubmit}
+				/>
+			);
+		}
 	}
 }
 
 function mapStateToProps(state) {
 	return {
 		error: state.error,
+		user: state.user,
 	};
 }
 
