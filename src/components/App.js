@@ -4,6 +4,7 @@ import HomePage from "./homepage/HomePage";
 import Header from "./common/Header";
 import Footer from "./common/Footer";
 import AboutUsPage from "./aboutuspage/AboutUsPage";
+import LoginPage from "./loginpage/LoginPage";
 import PageNotFound from "./PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +17,7 @@ function App() {
 			<Switch>
 				<Route exact path="/" component={HomePage} />
 				<Route path="/about" component={AboutUsPage} />
+				<Route path="/login" component={LoginPage} />
 				{/* <Route component={PageNotFound} /> */}
 			</Switch>
 			<Footer />

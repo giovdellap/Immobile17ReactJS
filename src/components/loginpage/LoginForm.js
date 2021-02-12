@@ -6,12 +6,6 @@ const LoginForm = ({ error, onSubmit }) => {
 	console.log("loginform");
 	return (
 		<>
-			{console.log("daiiiii")}
-			{console.log(error)}
-			{console.log(onSubmit)}
-			<div>
-				<h5>cacca</h5>
-			</div>
 			<Form onSubmit={onSubmit}>
 				<Form.Group>
 					<Form.Label className="formLabel">email</Form.Label>
