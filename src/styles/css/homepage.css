@@ -1,0 +1,13 @@
+@import "common.css";
+
+.cardsViewerTitle {
+	text-align: center;
+	color: var(--myblue);
+	font-size: 1.8vw;
+	font-weight: bold;
+	margin: 2%;
+}
+
+.cardsViewerBody {
+	margin-bottom: 2%;
+}

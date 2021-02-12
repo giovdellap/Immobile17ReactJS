@@ -1,0 +1,59 @@
+@import "common.css";
+
+/* --- HEIGTH --- */
+
+.imageRow {
+	max-height: 30%;
+}
+
+.bodyRow {
+	max-height: 70%;
+}
+
+.titleRow {
+	max-height: 20%;
+}
+
+.indirizzoRow {
+	max-height: 20%;
+}
+
+.cardLastRow {
+	max-height: 20%;
+}
+
+.card {
+	background-color: var(--mygrey);
+}
+
+.cardImage {
+	height: 270px;
+}
+
+.title {
+	color: var(--myblue);
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.indirizzo {
+	font-size: 1.4vw;
+	color: var(--myorange);
+	margin-bottom: 5%;
+}
+
+.descrizione {
+	font-size: 1.1vw;
+	margin-bottom: 8%;
+}
+
+.prezzo {
+	color: var(--myblue);
+	font-weight: bold;
+	font-size: 1.6vw;
+}
+
+.dimensione {
+	color: var(--myorange);
+	font-size: 1.6vw;
+}
