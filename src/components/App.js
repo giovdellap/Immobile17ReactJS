@@ -5,6 +5,8 @@ import Header from "./common/Header";
 import Footer from "./common/Footer";
 import AboutUsPage from "./aboutuspage/AboutUsPage";
 import LoginPage from "./loginpage/LoginPage";
+import ProfilePage from "./profilepage/ProfilePage";
+import RegistrationPage from "./registrationpage/RegistrationPage";
 import PageNotFound from "./PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +20,8 @@ function App() {
 				<Route exact path="/" component={HomePage} />
 				<Route path="/about" component={AboutUsPage} />
 				<Route path="/login" component={LoginPage} />
+				<Route path="/profile" component={ProfilePage} />
+				<Route path="/registration" component={RegistrationPage} />
 				{/* <Route component={PageNotFound} /> */}
 			</Switch>
 			<Footer />

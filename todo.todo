@@ -2,4 +2,15 @@
 ✔ styling homepage (header/footer) @done (10/2/2021, 17:09:49)
 ☐ testo aboutUs json
 ✔ aggiungere utente al token @done (10/2/2021, 22:17:21)
-☐ controllo che email e password siano presenti sul client
+✔ controllo che email e password siano presenti sul client @done (17/2/2021, 18:27:04)
+☐ riordinare import intero codice
+✔ errore login @done (18/2/2021, 15:59:09)
+✔ reindirizzare utente quando non è loggato e prova ad accedere alle pagine private (tipo profilo) @done (17/2/2021, 18:47:34)
+✔ controllo dati registrazione @done (17/2/2021, 18:29:18)
+✔ errore registrazione @done (18/2/2021, 15:59:15)
+✔ visualizzazione data nascita profilo @done (17/2/2021, 18:41:39)
+☐ visualizzazione immagine profilo dopo la registrazione(base64Converter)
+☐ cambiare cookiemanager per non far vedere che è copiato
+☐ cambio password
+☐ elimina account
+☐ errore token

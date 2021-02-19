@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as userActions from "../../redux/actions/userActions";
 import * as errorActions from "../../redux/actions/errorActions";
-import PropTypes from "prop-types";
+import * as tokenActions from "../../redux/actions/tokenActions";
 import { Redirect } from "react-router-dom";
 import { OverlayTrigger, Button, Dropdown, Tooltip } from "react-bootstrap";
 import LoginForm from "./LoginForm";
@@ -11,16 +11,27 @@ import { bindActionCreators } from "redux";
 class LoginPage extends React.Component {
 	componentDidMount() {
 		const { user, error, actions } = this.props;
+		console.log("component did Mount loginPage");
 	}
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		userActions.login(event);
+		const formData = new FormData(event.target);
+		const formDataObj = Object.fromEntries(formData.entries());
+		console.log(formDataObj);
+		const rememberMe = formDataObj.hasOwnProperty("rememberMe");
+		this.props.actions.login(
+			formDataObj.email,
+			formDataObj.password,
+			rememberMe
+		);
 	};
 
 	render() {
-		if (typeof this.props.user !== "undefined") {
-			return <Redirect to="/homepage" />;
+		console.log("UTENTE: " + this.props.user);
+		console.log("token: " + this.props.token);
+		if (Object.entries(this.props.user).length !== 0) {
+			return <Redirect to="/" />;
 		} else if (typeof this.props.error === "undefined") {
 			return <LoginForm onSubmit={this.handleSubmit} />;
 		} else {
@@ -35,18 +46,20 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
+	console.log("loginPage mapstateToprops");
 	return {
 		error: state.error,
 		user: state.user,
+		token: state.token,
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		actions: {
-			login: bindActionCreators(userActions.login, dispatch),
+			login: bindActionCreators(tokenActions.login, dispatch),
 			loginSuccess: bindActionCreators(
-				userActions.loginSuccess,
+				tokenActions.loginSuccess,
 				dispatch
 			),
 			errorLogin: bindActionCreators(errorActions.errorLogin, dispatch),

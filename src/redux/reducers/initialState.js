@@ -1,6 +1,7 @@
 export default {
 	immobili: [],
-	user: [],
+	token: {},
+	user: {},
 	error: [],
 	apiCallsInProgress: 0,
 };
