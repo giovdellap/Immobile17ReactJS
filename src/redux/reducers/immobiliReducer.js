@@ -11,9 +11,13 @@ export default function immobiliReducer(state = initialState.immobili, action) {
 		case types.LOAD_IMMOBILE_SUCCESS:
 			console.log("REDUCER: " + Object.entries(action.immobile));
 			if (state.length === 0) {
+				console.log("if reducer");
 				return [action.immobile];
 			} else {
-				return [...state].splice(0, action.immobile);
+				console.log("else reducer");
+				var array = [];
+				array.push(action.immobile);
+				return [...state].concat(array);
 			}
 		default:
 			return state;

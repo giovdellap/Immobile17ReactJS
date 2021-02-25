@@ -39,12 +39,25 @@ class CalendarSection extends React.Component {
 	}
 
 	getAppointmentCard() {
-		return this.props.appuntamenti.map((appuntamento) => {
+		console.log("getAppointment");
+		return this.props.user.appuntamenti.map((appuntamento) => {
 			if (appuntamento.id === this.state.id) {
+				console.log("primo if");
 				return this.props.immobili.map((immobile) => {
+					console.log("imm: "+immobile.id);
+					console.log("app: "+appuntamento.immobile);
 					if (immobile.id === appuntamento.immobile) {
+						console.log("nellif");
 						return (
 							<Container>
+								<Row>
+									<Button
+										variant="success"
+										onClick={this.onClickButton}
+									>
+										TORNA AL CALENDARIO
+									</Button>
+								</Row>
 								<Row>
 									<AppointmentCard
 										immobile={immobile}
