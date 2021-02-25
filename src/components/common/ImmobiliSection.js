@@ -10,7 +10,7 @@ import CardsCarousel from "../aboutuspage/CardsCarousel";
 class ImmobiliSection extends React.Component {
 	componentDidMount() {
 		const { immobili, actions } = this.props;
-		if (immobili.length === 0) {
+		if (immobili.length < 3) {
 			actions.loadImmobiliHomepage().catch((error) => {
 				alert("Caricamento fallito" + error);
 			});
@@ -20,7 +20,7 @@ class ImmobiliSection extends React.Component {
 	render() {
 		return (
 			<>
-				{this.props.immobili.length === 0 ? (
+				{this.props.immobili.length < 3 ? (
 					<Spinner />
 				) : (
 					<>

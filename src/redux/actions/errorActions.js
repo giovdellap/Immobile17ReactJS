@@ -16,3 +16,11 @@ export function errorToken() {
 export function errorRegistration(error) {
 	return { type: types.ERROR_REGISTRATION, error };
 }
+
+export function errorLoadImmobile(error) {
+	return { type: types.ERROR_LOAD_IMMOBILE, error };
+}
+
+export function errorChangePassword(error) {
+	return { type: types.ERROR_CHANGE_PASSWORD, error };
+}

@@ -2,7 +2,6 @@ import { handleResponse, handleError } from "./apiUtils";
 const baseUrl = "http://localhost/Immobile17/api/";
 
 export function sendLogin(email, password) {
-	console.log("userApi: " + email + " " + password);
 	const formData = new FormData();
 	formData.append("email", email);
 	formData.append("password", password);
@@ -34,7 +33,6 @@ export function registration(formDataObj) {
 	if (formDataObj.hasOwnProperty("date")) {
 		const toInvert = formDataObj.date.split("-");
 		const newDate = toInvert[0] + "-" + toInvert[1] + "-" + toInvert[2];
-		console.log("date: " + newDate);
 		formData.append("date", newDate);
 	}
 	if (formDataObj.hasOwnProperty("email")) {
@@ -43,15 +41,33 @@ export function registration(formDataObj) {
 	if (formDataObj.hasOwnProperty("password")) {
 		formData.append("password", formDataObj.password);
 	}
-	console.log(formDataObj);
 	if (formDataObj.propic.size > 0) {
 		formData.append("propic", formDataObj.propic);
-		console.log("HO AGGIUNTO L'IMMAGINE SIIIIII");
 	}
 	return fetch(baseUrl + "Utente/registrazione", {
 		method: "POST",
 		body: formData,
 	})
+		.then(handleResponse)
+		.catch(handleError);
+}
+
+export function changePassword(oldPw, newPw, token) {
+	const formData = new FormData();
+	formData.append("oldPassword", oldPw);
+	formData.append("password", newPw);
+
+	return fetch(baseUrl + "token/" + token + "/Utente/modificaPassword", {
+		method: "POST",
+		body: formData,
+	})
+		.then(handleResponse)
+		.catch(handleError);
+}
+
+export function getAppuntamenti(token) {
+	console.log("");
+	return fetch(baseUrl + "token/" + token + "/Utente/calendario")
 		.then(handleResponse)
 		.catch(handleError);
 }

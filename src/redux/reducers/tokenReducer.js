@@ -2,7 +2,7 @@ import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
 
 export default function tokenReducer(state = initialState.token, action) {
-	console.log("reducer: " + action.type);
+	console.log("tokenReducer: " + action.type);
 	switch (action.type) {
 		case types.LOGIN_SUCCESS:
 			return action.token;

@@ -3,5 +3,6 @@ export default {
 	token: {},
 	user: {},
 	error: [],
+	visualizzazione: { ids: [], params: {} },
 	apiCallsInProgress: 0,
 };

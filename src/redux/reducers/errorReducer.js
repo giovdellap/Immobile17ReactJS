@@ -6,14 +6,9 @@ function actionTypeEndsInSuccess(type) {
 }
 
 export default function errorReducer(state = initialState.error, action) {
-	switch (action.type) {
-		case types.ERROR_LOGIN:
-			return action.error;
-
-		default:
-			if (actionTypeEndsInSuccess(action.type)) {
-				return [];
-			}
-			return state;
-	}
+	if (action.type.substring(action.type.length - 8) === "_SUCCESS") {
+		return [];
+	} else if (action.type.substring(0, 6) === "ERROR") {
+		return action.error;
+	} else return state;
 }

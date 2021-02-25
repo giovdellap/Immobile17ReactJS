@@ -23,7 +23,7 @@ class CardImmobile extends React.Component {
 									<Card.Title>
 										<Link
 											to={
-												"/visualizza/" +
+												"/immobile/" +
 												this.props.immobile.id
 											}
 											className="title"

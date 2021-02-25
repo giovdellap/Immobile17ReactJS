@@ -11,14 +11,12 @@ import { bindActionCreators } from "redux";
 class LoginPage extends React.Component {
 	componentDidMount() {
 		const { user, error, actions } = this.props;
-		console.log("component did Mount loginPage");
 	}
 
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const formData = new FormData(event.target);
 		const formDataObj = Object.fromEntries(formData.entries());
-		console.log(formDataObj);
 		const rememberMe = formDataObj.hasOwnProperty("rememberMe");
 		this.props.actions.login(
 			formDataObj.email,
@@ -28,8 +26,6 @@ class LoginPage extends React.Component {
 	};
 
 	render() {
-		console.log("UTENTE: " + this.props.user);
-		console.log("token: " + this.props.token);
 		if (Object.entries(this.props.user).length !== 0) {
 			return <Redirect to="/" />;
 		} else if (typeof this.props.error === "undefined") {

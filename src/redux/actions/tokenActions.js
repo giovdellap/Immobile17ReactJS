@@ -8,12 +8,10 @@ export function login(email, password, rememberMe) {
 	console.log("action login mail: " + email);
 	console.log("action login pw: " + password);
 	return function (dispatch) {
-		console.log("action login");
 		dispatch(beginApiCall());
 		return userApi
 			.sendLogin(email, password)
 			.then((loginResponse) => {
-				console.log("userAction: " + loginResponse);
 				if (loginResponse.hasOwnProperty("error")) {
 					dispatch(errorActions.errorLogin(loginResponse.error));
 				} else {

@@ -24,8 +24,6 @@ class Header extends React.Component {
 
 	componentDidMount() {
 		const { token, user, actions } = this.props;
-		console.log("1: " + token);
-		console.log("2: " + Object.entries(user).length);
 		const cookieToken = cookieManager.readCookie();
 		console.log("HEADER TOKEN: " + cookieToken);
 		if (cookieToken !== "NO COOKIE") {
@@ -42,7 +40,6 @@ class Header extends React.Component {
 	}
 
 	render() {
-		console.log("UTENTISSIMO: " + this.props.user);
 		return (
 			<Container fluid className="header">
 				<Row>
@@ -108,7 +105,6 @@ class Header extends React.Component {
 
 Header.propTypes = {
 	user: PropTypes.object,
-	token: PropTypes.object,
 };
 
 function mapStateToProps(state) {

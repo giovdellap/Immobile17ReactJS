@@ -33,22 +33,6 @@ class UserViewer extends React.Component {
 								Controlla la tua email per attivare il profilo
 							</Row>
 						)}
-						<Row>
-							<Button
-								variant="primary"
-								className="changePasswordButton"
-							>
-								CAMBIA PASSWORD
-							</Button>
-						</Row>
-						<Row>
-							<Button
-								variant="primary"
-								className="deleteAccountButton"
-							>
-								ELIMINA ACCOUNT
-							</Button>
-						</Row>
 					</Col>
 				</Row>
 			</Container>

@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { Form, Button, Col, Container, Row } from "react-bootstrap";
 
 const LoginForm = ({ error, onSubmit }) => {
-	console.log("loginform");
 	return (
 		<Container fluid>
 			<Row className="formRow">
