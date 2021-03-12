@@ -2,14 +2,20 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import PropTypes from "prop-types";
 import CardImmobile from "../common/CardImmobile";
-import "../../styles/css/homepage.css";
 
+/**
+ * Effettua il rendering della sezione immobili della homepage
+ */
 class CardsViewer extends React.Component {
 	render() {
 		return (
-			<>
-				<div className="cardsViewerTitle">IMMOBILI IN EVIDENZA</div>
-				<div className="cardsViewerBody">
+			<div id="view-cards" className="view-cards-area">
+				<div className="view-cards-title">
+					<h2>IMMOBILI IN EVIDENZA</h2>
+					<span></span>
+					<p>Guarda gli immobili che abbiamo scelto per te</p>
+				</div>
+				<div className="view-cards-content">
 					<Container>
 						<Row>
 							<Col md={4}>
@@ -30,7 +36,7 @@ class CardsViewer extends React.Component {
 						</Row>
 					</Container>
 				</div>
-			</>
+			</div>
 		);
 	}
 }

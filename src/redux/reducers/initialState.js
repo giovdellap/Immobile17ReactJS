@@ -4,5 +4,4 @@ export default {
 	user: {},
 	error: [],
 	visualizzazione: { ids: [], params: {} },
-	apiCallsInProgress: 0,
 };

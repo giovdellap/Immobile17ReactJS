@@ -1,13 +1,14 @@
 import * as types from "./actionTypes";
 import * as userApi from "../../api/userApi";
 import * as errorActions from "./errorActions";
-import { beginApiCall, apiCallError } from "./apiStatusActions";
-import { base64Converter } from "../../utils/utils";
+import { base64Converter } from "../../utils/actionUtils";
 
+/**
+ * Effettua la chiamata alle API per ottenere il profilo dell'utente
+ * @param {*} token
+ */
 export function getProfileByToken(token) {
 	return function (dispatch) {
-		console.log("getProfilebytoken");
-		dispatch(beginApiCall());
 		return userApi
 			.getProfile(token)
 			.then((response) => {
@@ -16,7 +17,6 @@ export function getProfileByToken(token) {
 					: dispatch(errorActions.errorToken);
 			})
 			.catch((error) => {
-				dispatch(apiCallError(error));
 				throw error;
 			});
 	};
@@ -26,16 +26,19 @@ export function getProfileByTokenSuccess(user) {
 	return { type: types.GET_PROFILE_BY_TOKEN_SUCCESS, user };
 }
 
+/**
+ * Effettua la chiamata alle API per la registrazione
+ * In caso di esito positivo, comunica il token e il profilo dell'utente per aggiungerli allo stato
+ * @param {*} formDataObj
+ */
 export function registration(formDataObj) {
 	return function (dispatch) {
-		dispatch(beginApiCall());
 		return userApi.registration(formDataObj).then((response) => {
 			if (response.hasOwnProperty("error")) {
 				dispatch(errorActions.errorRegistration(response));
 			} else {
 				formDataObj.dataNascita = formDataObj.date;
 				base64Converter(formDataObj.propic).then(function (result) {
-					console.log("ACQUA LETE");
 					formDataObj.immagine = result;
 				});
 				delete formDataObj.date;
@@ -52,7 +55,6 @@ export function registrationSuccess(token, user) {
 
 export function changePassword(oldPw, newPw, user, token) {
 	return function (dispatch) {
-		dispatch(beginApiCall());
 		return userApi.changePassword(oldPw, newPw, token).then((response) => {
 			if (response.hasOwnProperty("error")) {
 				dispatch(errorActions.errorChangePassword(response));
@@ -71,8 +73,6 @@ export function changePasswordSuccess(user) {
 
 export function getAppuntamenti(user, token) {
 	return function (dispatch) {
-		dispatch(beginApiCall());
-		console.log("TOKEN ACTION: " + token);
 		return userApi.getAppuntamenti(token).then((response) => {
 			if (response.hasOwnProperty("error")) {
 				dispatch(errorActions.errorToken());

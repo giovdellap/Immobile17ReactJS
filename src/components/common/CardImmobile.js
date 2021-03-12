@@ -1,72 +1,89 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Container, Button } from "react-bootstrap";
-import "../../styles/css/cardImmobile.css";
 
+/**
+ * Effettua il render della Card descrittiva dell'immobile
+ * @param this.props.immobile l'immobile da visualizzare
+ */
 class CardImmobile extends React.Component {
 	render() {
 		return (
-			<Card>
-				<Container fluid>
-					<Row className="imageRow">
-						<Card.Img
-							variant="top"
-							src={this.props.immobile.immagini[0]}
-							className="cardImage"
-						/>
-					</Row>
-					<Row className="bodyRow">
-						<Card.Body className="card">
-							<Container fluid>
-								<Row className="titleRow">
-									<Card.Title>
-										<Link
-											to={
-												"/immobile/" +
-												this.props.immobile.id
-											}
-											className="title"
-										>
-											{this.props.immobile.nome}
-										</Link>
-									</Card.Title>
-								</Row>
-
-								<Row className="indirizzoRow">
-									<div className="indirizzo">
-										{this.props.immobile.indirizzo},{" "}
-										{this.props.immobile.comune}
+			<div id="view-cards" className="view-cards-area">
+				<Card>
+					<Container fluid className="card-item">
+						<Row>
+							<Card.Img
+								variant="top"
+								src={this.props.immobile.immagini[0]}
+								className="card-image"
+							/>
+						</Row>
+						<Row>
+							<Card.Body className="card-content">
+								<Container fluid>
+									<div className="card-content">
+										<Row>
+											<Card.Title>
+												<Link
+													to={
+														"/immobile/" +
+														this.props.immobile.id
+													}
+													className="card-title"
+												>
+													<h5>
+														{
+															this.props.immobile
+																.nome
+														}
+													</h5>
+												</Link>
+											</Card.Title>
+										</Row>
+										<Row>
+											<div className="card-item-about">
+												<p>
+													{this.props.immobile.descrizione.substring(
+														0,
+														187
+													)}
+													{"..."}
+												</p>
+											</div>
+										</Row>
 									</div>
-								</Row>
-								<Row className="descrizioneRow">
-									<div className="descrizione">
-										{this.props.immobile.descrizione.substring(
-											0,
-											120
-										)}
-										{"..."}
+									<div className="card-item-detial">
+										<Row>
+											<div className="card-indirizzo">
+												{this.props.immobile.indirizzo},{" "}
+												{this.props.immobile.comune}
+											</div>
+										</Row>
+										<Row className="cardLastRow">
+											<Col md={6}>
+												<div className="card-item-info card-prezzo">
+													{this.props.immobile.prezzo}
+													{" €"}
+												</div>
+											</Col>
+											<Col md={6}>
+												<div className="card-item-info card-grandezza">
+													{
+														this.props.immobile
+															.grandezza
+													}
+													{" mq"}
+												</div>
+											</Col>
+										</Row>
 									</div>
-								</Row>
-								<Row className="cardLastRow">
-									<Col md={6}>
-										<div className="prezzo">
-											{this.props.immobile.prezzo}
-											{" €"}
-										</div>
-									</Col>
-									<Col md={6}>
-										<div className="dimensione lastRowBox">
-											{this.props.immobile.grandezza}
-											{" mq"}
-										</div>
-									</Col>
-								</Row>
-							</Container>
-						</Card.Body>
-					</Row>
-				</Container>
-			</Card>
+								</Container>
+							</Card.Body>
+						</Row>
+					</Container>
+				</Card>
+			</div>
 		);
 	}
 }

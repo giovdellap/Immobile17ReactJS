@@ -4,15 +4,18 @@ import * as userActions from "../../redux/actions/userActions";
 import * as errorActions from "../../redux/actions/errorActions";
 import * as tokenActions from "../../redux/actions/tokenActions";
 import { Redirect } from "react-router-dom";
-import { OverlayTrigger, Button, Dropdown, Tooltip } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 import { bindActionCreators } from "redux";
 
+/**
+ * classe per la gestione della page di login
+ */
 class LoginPage extends React.Component {
-	componentDidMount() {
-		const { user, error, actions } = this.props;
-	}
-
+	/**
+	 * listener della login form
+	 * Effettua il dispatch della action login estraendo i dati dall'evento
+	 * @param {*} event
+	 */
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const formData = new FormData(event.target);
@@ -42,7 +45,6 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-	console.log("loginPage mapstateToprops");
 	return {
 		error: state.error,
 		user: state.user,

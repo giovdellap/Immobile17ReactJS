@@ -1,36 +1,43 @@
 import * as types from "./actionTypes";
 import * as userApi from "../../api/userApi";
 import * as errorActions from "./errorActions";
-import { beginApiCall, apiCallError } from "./apiStatusActions";
 import * as cookieManager from "../../utils/cookieManager";
 
+/**
+ * Effettua la chiamata alle API per il login
+ * In caso positivo, effettua il dispatch del token ricevuto in risposta, in caso negativo del messaggio di errore
+ * Nel caso rememberMe sia true, salva il token nel cookie
+ * @param {*} email
+ * @param {*} password
+ * @param {*} rememberMe
+ */
 export function login(email, password, rememberMe) {
-	console.log("action login mail: " + email);
-	console.log("action login pw: " + password);
 	return function (dispatch) {
-		dispatch(beginApiCall());
 		return userApi
 			.sendLogin(email, password)
 			.then((loginResponse) => {
 				if (loginResponse.hasOwnProperty("error")) {
 					dispatch(errorActions.errorLogin(loginResponse.error));
 				} else {
-					cookieManager.createCookie(loginResponse);
+					if (rememberMe) {
+						cookieManager.createCookie(loginResponse);
+					}
 					dispatch(loginSuccess(loginResponse));
 				}
 			})
 			.catch((error) => {
-				dispatch(apiCallError(error));
 				throw error;
 			});
 	};
 }
 
 export function loginSuccess(token) {
-	console.log("loginSuccess " + token);
 	return { type: types.LOGIN_SUCCESS, token };
 }
 
+/**
+ * Se il cookie è presente, lo elimina
+ */
 export function logout() {
 	if (cookieManager.readCookie() !== "NO COOKIE") {
 		cookieManager.eraseCookie();

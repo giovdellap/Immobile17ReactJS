@@ -7,7 +7,14 @@ import Spinner from "./spinner/Spinner";
 import CardsViewer from "../homepage/CardsViewer";
 import CardsCarousel from "../aboutuspage/CardsCarousel";
 
+/**
+ * Effettua il rendering della ImmobiliSection
+ */
 class ImmobiliSection extends React.Component {
+	/**
+	 * Se non sono presenti abbastanza immobili nello state,
+	 * chiama la action loadImmobiliHomePage
+	 */
 	componentDidMount() {
 		const { immobili, actions } = this.props;
 		if (immobili.length < 3) {

@@ -1,0 +1,658 @@
+/* BASE - Base tyles, Variables, Mixins, etc. */
+
+body {
+	background-color: #ffffff;
+	font-family: "Open Sans", sans-serif;
+	color: #333333;
+	font-size: 15px;
+	overflow-x: hidden;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+/* MODULES - Individual site components */
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:hover,
+a:focus {
+	outline: none;
+	text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Poppins", sans-serif;
+}
+
+h2 {
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 40px;
+	margin: 0;
+}
+
+img {
+	border: none;
+}
+
+/* ----- COMMON ----- */
+
+.text-on-image {
+	background-color: rgba(176, 176, 172, 0.7);
+}
+
+.def-btn {
+	color: #fff;
+	padding: 10px 15px;
+	font-size: 16px;
+	display: inline-block;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.def-btn:hover,
+.def-btn:focus {
+	background-color: #fff;
+}
+
+.map-section {
+	width: 100%;
+	height: 420px;
+	display: inline;
+}
+
+/* Form */
+
+.form-field {
+	border: 1px solid #fff;
+	border-radius: 2px;
+	color: #555;
+	height: 40px;
+	padding: 5px;
+	width: 100%;
+	font-size: 18px;
+}
+
+.search-btn {
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+/* User Forms */
+
+.user-form {
+	border: #444 2px solid;
+}
+
+.login-btn {
+	margin: 0px 3px 3px auto;
+}
+
+.registration-btn {
+	margin: 10px 10px 20px auto;
+}
+
+/* ----- HEADER ----- */
+
+.header {
+	background-color: #fff;
+}
+
+.header-btn {
+	border: none;
+	font-size: 17px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+/* ---- FOOTER ----- */
+
+.footer-umberto-tozzi {
+}
+
+.footer-area {
+	padding: 30px 0 20px 0;
+}
+
+.footer-table {
+	color: #cacfd9;
+	margin-top: 2%;
+}
+
+.footer-logo {
+	margin-bottom: 10px;
+}
+
+.footer-left {
+	padding-left: 20px;
+}
+
+/* ----- HOMEPAGE ----- */
+
+/* ImageCarousel */
+
+.homepage-carousel-item {
+	height: 500px;
+	width: 100%;
+	position: relative;
+}
+
+/* SearchButtonSection */
+
+#search-section {
+	background-image: url("../images/homepage/aquila3.jpg");
+	background-attachment: fixed;
+	background-position: center center;
+	background-size: cover;
+	display: inline;
+	float: left;
+	width: 100%;
+	padding: 50px 0;
+	margin: 50px 0;
+	position: relative;
+}
+#search-section:before {
+	background-color: rgba(0, 0, 0, 0.3);
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+#search-section .search-section-area {
+	display: inline;
+	float: left;
+	width: 100%;
+	padding: 0 20px;
+	text-align: center;
+}
+#search-section .search-section-area h3 {
+	color: #fff;
+	font-size: 40px;
+	font-weight: 700;
+	margin-bottom: 20px;
+	text-transform: capitalize;
+}
+#search-section .search-section-area p {
+	color: #fff;
+	display: inline-block;
+	font-size: 16px;
+	margin-top: 10px;
+}
+#search-section .search-section-area a {
+	font-weight: bold;
+	margin-top: 50px;
+	text-transform: uppercase;
+}
+
+.search-btn {
+	margin: 5px;
+}
+
+/* ImmobiliViewer */
+
+.view-cards-title {
+	display: inline;
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.view-cards-title p {
+	font-size: 18px;
+	padding: 0 50px;
+}
+
+.view-cards-title span {
+	width: 2px;
+	height: 15px;
+	display: inline-block;
+	position: relative;
+}
+.view-cards-title span:before {
+	content: "";
+	right: 4px;
+	top: 7px;
+	position: absolute;
+	width: 100px;
+	height: 2px;
+}
+.view-cards-title span:after {
+	content: "";
+	left: 4px;
+	top: 7px;
+	position: absolute;
+	width: 100px;
+	height: 2px;
+}
+
+#view-cards {
+	background-color: #f8f8f8;
+	display: inline;
+	float: left;
+	width: 100%;
+	padding: 10px 0;
+}
+#view-cards .view-cards-area {
+	display: inline;
+	float: left;
+	width: 100%;
+}
+#view-cards .view-cards-area .view-cards-content {
+	display: inline;
+	float: left;
+	margin-top: 10px;
+	width: 100%;
+}
+
+/* ----- CARDS ----- */
+
+.card-item {
+	display: inline;
+	float: left;
+	width: 100%;
+	position: relative;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.card-item:hover {
+	box-shadow: 1px 2px 5px 3px #ccc;
+}
+
+.aa-properties-item .for-rent {
+	background-color: #20ceb3;
+}
+.aa-properties-item .sold-out {
+	background-color: #ff0000;
+}
+.card-item .card-item-content {
+	background-color: #fff;
+	display: inline;
+	float: left;
+	width: 100%;
+}
+
+.card-item-about {
+	display: inline;
+	float: left;
+	width: 100%;
+	padding: 0 2px 5px 2px;
+}
+.card-item-about h3 {
+	margin-top: 0px;
+}
+.card-item-about p {
+	font-size: 14px;
+	font-family: monospace;
+	text-align: justify;
+}
+.card-item-detial {
+	border-top: 1px solid #ddd;
+	display: inline;
+	float: left;
+	padding: 10px 0;
+	width: 100%;
+}
+.card-item-info {
+	float: left;
+	font-size: 18px;
+	padding: 3px 0;
+}
+.card-item-detial a {
+	float: right;
+}
+
+.card-image {
+	height: 300px;
+	width: 100%;
+}
+
+.card-title {
+	color: #59abe3;
+	font-weight: bold;
+}
+
+.card-indirizzo {
+	margin: 0 2px;
+	font-family: monospace;
+}
+
+.card-prezzo {
+	color: #59abe3;
+}
+
+.card-grandezza {
+	color: #e36559;
+	margin-left: 20%;
+}
+
+/* --- IMMOBILIPAGE ----- */
+
+/* SearchForm */
+
+.search-form-area {
+	background-color: rgba(150, 150, 150, 0.8);
+	border-radius: 10px 10px 0 0;
+	display: inline;
+	float: left;
+	min-height: 200px;
+	margin: 25px 0;
+	padding: 25px 20px;
+	position: relative;
+	width: 100%;
+}
+
+.search-form-field {
+	padding-bottom: auto;
+}
+
+.search-form-group {
+	margin: auto;
+	position: relative;
+	top: 20%;
+	bottom: 50%;
+}
+
+.search-form-bottom {
+	display: inline;
+	float: left;
+	width: 100%;
+	margin-top: 50px;
+}
+
+.form-range-label {
+	display: inline;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+	font-family: "Poppins", sans-serif;
+	margin: 2% 0 2% 3%;
+}
+
+.form-range-input {
+	border: 1px solid #fff;
+	border-radius: 2px;
+	color: #555;
+	height: 40px;
+	margin: 0 3%;
+	padding: 5px;
+	width: 70%;
+	font-size: 18px;
+}
+
+.form-range-input-row {
+	margin-bottom: 15px;
+}
+
+/* ----- PROFILE PAGE ----- */
+
+.profile-page {
+	margin-bottom: 10px;
+}
+
+.profile-image {
+	width: 100%;
+}
+
+.profile-info {
+	padding-top: 20%;
+}
+
+.profile-checkEmail {
+	color: red;
+}
+
+.profile-page-btn {
+	margin: 4% 0;
+}
+
+/* ----- IMMOBILI PAGE ----- */
+
+.align-pagination {
+	margin: 20px auto;
+}
+
+.pagination-font {
+	font-family: "Varela Round", Arial, sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.7;
+	color: #7f7f7f;
+	background: #fff;
+	height: 100%;
+	position: relative;
+	text-align: center;
+}
+
+.pagination a {
+	background: none;
+	border: none !important;
+	color: gray !important;
+	text-align: center;
+}
+.pagination a:hover,
+.pagination a:focus,
+.pagination a:active {
+	background: none !important;
+	text-align: center;
+}
+.pagination > li > a {
+	margin: 0 2px;
+	font-size: 18px;
+	padding: 0 !important;
+	background: none;
+	-webkit-border-radius: 50% !important;
+	-moz-border-radius: 50% !important;
+	-ms-border-radius: 50% !important;
+	-o-border-radius: 50% !important;
+	border-radius: 50% !important;
+	height: 50px;
+	width: 50px;
+	line-height: 50px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.pagination > li > a:hover {
+	color: #000;
+	background: #e6e6e6 !important;
+	text-align: center;
+}
+.pagination > li.disabled > a {
+	background: none;
+	text-align: center;
+}
+.pagination > li.active > a {
+	background: #118df0 !important;
+	-webkit-box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	color: #fff !important;
+	text-align: center;
+}
+.pagination > li.active > a:hover {
+	cursor: pointer;
+	background: #41a4f3 !important;
+	text-align: center;
+}
+
+.pagination span {
+	background: none;
+	border: none !important;
+	color: gray !important;
+	text-align: center;
+}
+.pagination span:hover,
+.pagination span:focus,
+.pagination span:active {
+	background: none !important;
+	text-align: center;
+}
+.pagination > li > span {
+	margin: 0 2px;
+	font-size: 18px;
+	padding: 0 !important;
+	background: none;
+	-webkit-border-radius: 50% !important;
+	-moz-border-radius: 50% !important;
+	-ms-border-radius: 50% !important;
+	-o-border-radius: 50% !important;
+	border-radius: 50% !important;
+	height: 50px;
+	width: 50px;
+	line-height: 50px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.pagination > li > span:hover {
+	color: #000;
+	background: #e6e6e6 !important;
+	text-align: center;
+}
+.pagination > li.disabled > span {
+	background: none;
+	text-align: center;
+}
+.pagination > li.active > span {
+	background: #118df0 !important;
+	-webkit-box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	box-shadow: 4px 11px 35px -14px rgba(0, 0, 0, 0.5);
+	color: #fff !important;
+	text-align: center;
+}
+.pagination > li.active > span:hover {
+	cursor: pointer;
+	background: #41a4f3 !important;
+	text-align: center;
+}
+
+/* ----- PROFILE PAGE ----- */
+
+.card-utente {
+	padding: 5px 0;
+	border-bottom-style: double;
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+}
+
+.card-utente-title {
+	color: #59abe3;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+.card-utente-text {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.appointment-section {
+	text-align: center;
+	width: 100%;
+	margin-top: 10px;
+	color: #e36559;
+}
+
+.personal-calendar {
+	width: 100%;
+}
+
+/* ---- ABOUTUS PAGE ----- */
+
+.aboutus-right-col {
+	margin-left: 10px;
+	margin-right: 2px;
+}
+
+.text-aboutus {
+	text-align: justify;
+}
+
+.cardscarousel {
+	display: table-row;
+}
+
+/* ----- IMMOBILE PAGE ----- */
+.carousel-immobile {
+	height: 450px;
+	width: 80%;
+	position: relative;
+	margin: 0 auto;
+}
+
+.carousel-image {
+	height: 450px;
+	width: fit-content;
+}
+
+.carousel-section {
+	margin: 10px0;
+}
+
+.aa-properties-details {
+	display: inline;
+	float: left;
+	width: 100%;
+}
+
+.aa-properties-details h4 {
+	margin: 5px 0 10 px 0;
+}
+.title-immobile h2 {
+	margin-top: 20px;
+}
+.aa-price-immobile {
+	color: #000;
+	display: inline-block;
+	font-size: 30px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+.aa-map-title {
+	font-size: 22px;
+	margin-bottom: 15px;
+	margin-top: 20px;
+}
+.aa-descrizione {
+	text-align: justify;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+.calendar-section {
+	margin: 50px auto 30px auto;
+}
+
+.aa-properties {
+	position: relative;
+	display: block;
+}

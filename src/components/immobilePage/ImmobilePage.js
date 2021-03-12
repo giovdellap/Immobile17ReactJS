@@ -6,7 +6,14 @@ import { bindActionCreators } from "redux";
 import * as immobiliActions from "../../redux/actions/immobiliActions";
 import ImmobileView from "./ImmobileView";
 
+/**
+ * classe per il rendering della immobile page
+ */
 class ImmobilePage extends React.Component {
+	/**
+	 *
+	 * @returns bolleano che indica se l'immobili è presente nello stato
+	 */
 	isImmobileinState() {
 		var toReturn = false;
 		Object.keys(this.props.immobili).map((key) => {
@@ -17,12 +24,15 @@ class ImmobilePage extends React.Component {
 		return toReturn;
 	}
 
+	/**
+	 * Se il campo error dello stato è vuoto e l'immobile non è presente,
+	 * Effettua il dispatch della action loadImmobile
+	 */
 	componentDidMount() {
 		if (
 			this.props.error !== "IMMOBILE NON PRESENTE" &&
 			!this.isImmobileinState()
 		) {
-			console.log("STO QUI");
 			this.props.actions.loadImmobile(this.props.id);
 		}
 	}
@@ -39,7 +49,6 @@ class ImmobilePage extends React.Component {
 					immobile = this.props.immobili[key];
 				}
 			});
-			console.log("IMMOBILE: " + Object.entries(immobile));
 			return <ImmobileView immobile={immobile} />;
 		}
 	}

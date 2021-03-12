@@ -6,9 +6,15 @@ import * as immobiliActions from "../../redux/actions/immobiliActions";
 import CardImmobile from "../common/CardImmobile";
 import PageHandler from "./PageHandler";
 
+/**
+ * Effettua il rendering della sezione immobili della immobili page
+ */
 class ImmobiliViewer extends React.Component {
 	state = { page: 1 };
 
+	/**
+	 * Effettua il dispatch della action loadImmobiliById
+	 */
 	componentDidMount() {
 		this.props.actions.loadImmobiliById(
 			this.props.visualizzazione,
@@ -17,6 +23,11 @@ class ImmobiliViewer extends React.Component {
 		);
 	}
 
+	/**
+	 * Nel caso in cui la visualizzazione sia cambiata,
+	 * Imposta la pagina corrente a 1 ed effettua il dispatch di loadImmobiliById
+	 * @param {*} prevProps
+	 */
 	componentDidUpdate(prevProps) {
 		if (this.props.visualizzazione !== prevProps.visualizzazione) {
 			this.setState({ page: 1 });
@@ -28,6 +39,12 @@ class ImmobiliViewer extends React.Component {
 		}
 	}
 
+	/**
+	 *
+	 * @param {*} ids gli id degli immobili da visualizzare
+	 * @param {*} immobili gli immobili dello stato
+	 * @returns un array degli immobili da visualizzare
+	 */
 	getImmobiliPage(ids, immobili) {
 		var toReturn = [];
 		for (let i = 0; i < ids.length; i++) {
@@ -37,19 +54,30 @@ class ImmobiliViewer extends React.Component {
 				}
 			}
 		}
-
 		return toReturn;
 	}
 
+	/**
+	 *
+	 * @returns gli id degli immobili da visualizzare nella pagina attuale
+	 */
 	idsToRender() {
 		const index = (this.state.page - 1) * 9;
 		return this.props.visualizzazione.ids.slice(index, index + 9);
 	}
 
+	/**
+	 *
+	 * @returns gli immobili da visualizzare
+	 */
 	immobiliToRender() {
 		return this.getImmobiliPage(this.idsToRender(), this.props.immobili);
 	}
 
+	/**
+	 *
+	 * @returns un booleano che indica che tutti gli immobili da visualizzare sono presenti nello stato
+	 */
 	canIRender() {
 		return (
 			this.immobiliToRender().length < 9 &&
@@ -57,6 +85,11 @@ class ImmobiliViewer extends React.Component {
 		);
 	}
 
+	/**
+	 * listener del PageHandler
+	 * Cambia la pagina nello stato e richiede gli immobili della nuova page
+	 * @param {*} newPage pagina cliccata
+	 */
 	handlePageChange(newPage) {
 		this.setState({ page: newPage });
 		this.props.actions.loadImmobiliById(

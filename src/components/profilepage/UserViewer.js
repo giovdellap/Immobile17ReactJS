@@ -1,38 +1,45 @@
 import React from "react";
 import { Container, Col, Row, Image, Button } from "react-bootstrap";
-import { dateStringConverter } from "../../utils/utils";
-import "../../styles/css/profilepage.css";
+import { dateStringConverter } from "../../utils/dateUtils";
 
+/**
+ * Effettua il rendering delle informazioni dell'utente
+ */
 class UserViewer extends React.Component {
 	render() {
 		return (
 			<Container fluid>
 				<Row className="mainRow">
-					<Col md="4">
-						<Image
-							src={this.props.user.immagine}
-							roundedCircle
-							className="image"
-						/>
+					<Col md="6">
+						<div className="image">
+							<Image
+								src={this.props.user.immagine}
+								roundedCircle
+								className="profile-image"
+							/>
+						</div>
 					</Col>
-					<Col md="8">
-						<Row className="informationRow">
-							{this.props.user.nome} {this.props.user.cognome}
-						</Row>
-						<Row className="informationRow">
-							{this.props.user.mail}
-						</Row>
-						<Row className="informationRow">
-							Nato il{" "}
-							{dateStringConverter(this.props.user.dataNascita)}
-						</Row>
-						{this.props.user.attivato ? (
-							<></>
-						) : (
-							<Row className="checkEmailRow">
-								Controlla la tua email per attivare il profilo
+					<Col md="6">
+						<div className="profile-info">
+							<Row>
+								{this.props.user.nome} {this.props.user.cognome}
 							</Row>
-						)}
+							<Row>{this.props.user.mail}</Row>
+							<Row>
+								Nato il{" "}
+								{dateStringConverter(
+									this.props.user.dataNascita
+								)}
+							</Row>
+							{this.props.user.attivato ? (
+								<></>
+							) : (
+								<Row className="profile-checkEmail">
+									Controlla la tua email per attivare il
+									profilo
+								</Row>
+							)}
+						</div>
 					</Col>
 				</Row>
 			</Container>

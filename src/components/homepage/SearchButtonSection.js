@@ -5,41 +5,81 @@ import { bindActionCreators } from "redux";
 import * as immobiliActions from "../../redux/actions/immobiliActions";
 import { Redirect } from "react-router-dom";
 
+/**
+ * Effettua il rendering della searchbuttonsection
+ * Costruisce una nuova visualizzazione in caso di click
+ */
 class SearchButtonSection extends React.Component {
+	/**
+	 * Inizializza lo stato con un booleano redirect settato a false
+	 * @param {*} props
+	 */
 	constructor(props) {
 		super(props);
 		this.state = { redirect: false };
 	}
 
+	/**
+	 * listener dei Button
+	 * chiama la action Ricerca
+	 * @param {*} type
+	 */
 	handleClick = (type) => {
 		var parameters = {};
 		parameters.ti = type;
 		this.props.actions.ricerca(parameters);
 	};
 
+	/**
+	 * Nel caso props.visualizzazione cambi modifica state.redirect a true
+	 * @param {*} prevProps
+	 */
 	componentDidUpdate(prevProps) {
-		if (prevProps.visualizzazione !== this.props.visualizzazione.params) {
+		if (prevProps.visualizzazione !== this.props.visualizzazione) {
 			this.setState({ redirect: true });
 		}
 	}
 
+	/**
+	 * Se redirect = true, reindirizza alla page immobili
+	 * @returns rendering della sezione
+	 */
 	render() {
 		if (this.state.redirect === false) {
 			return (
-				<Container fluid>
-					<Row>TROVA L'IMMOBILE IN VENDITA GIUSTO PER TE</Row>
+				<div id="search-section">
 					<Row>
-						<Button onClick={() => this.handleClick("Vendita")}>
-							IMMOBILI IN VENDITA
-						</Button>
+						<div className="search-section-area">
+							<div className="text-on-image">
+								<h3>
+									TROVA L'IMMOBILE IN VENDITA GIUSTO PER TE
+								</h3>
+								<p>
+									Vuoi trovare una villa immersa nella natura
+									per goderti la crescita della tua famiglia?
+									<br />
+									Stai cercando un monolocale che rifletta il
+									tuo stile di vita dinamico?
+								</p>
+							</div>
+
+							<Button
+								variant="default"
+								onClick={() => this.handleClick("Vendita")}
+								bsPrefix="def-btn search-btn"
+							>
+								CERCA TRA GLI IMMOBILI IN VENDITA
+							</Button>
+							<Button
+								variant="default"
+								onClick={() => this.handleClick("Affitto")}
+								bsPrefix="def-btn search-btn"
+							>
+								CERCA TRA GLI IMMOBILI IN AFFITTO
+							</Button>
+						</div>
 					</Row>
-					<Row>TROVA L'IMMOBILE IN AFFITTO GIUSTO PER TE</Row>
-					<Row>
-						<Button onClick={this.handleClick.bind("Affitto")}>
-							IMMOBILI IN AFFITTO
-						</Button>
-					</Row>
-				</Container>
+				</div>
 			);
 		} else {
 			return <Redirect to="/immobili" />;

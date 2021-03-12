@@ -1,101 +1,152 @@
 import React, { useState } from "react";
 import { Form, Row, Col, Button, FormControl } from "react-bootstrap";
-import RangeSlider from "react-bootstrap-range-slider";
 
+/**
+ * Utilizza due campi dello stato (prezzo/grandezza) per la gestione degli slider
+ * @param onSubmit listener del submit button
+ * @param parameters i parametri della ricerca precedente
+ * @returns il rendering della form di ricerca
+ */
 const SearchForm = ({ onSubmit, parameters }) => {
 	const [prezzo, setPrezzo] = useState(
 		parameters.hasOwnProperty("pmax") ? parameters.pmax : 1000000
 	);
 	const [grandezza, setGrandezza] = useState(
-		parameters.hasOwnProperty("gmin") ? parameters.gmin : 2000
+		parameters.hasOwnProperty("gmin") ? parameters.gmin : 20
 	);
 
 	return (
-		<Form onSubmit={onSubmit}>
-			<Col md="4">
-				<Form.Group>
-					<Form.Control
-						as="input"
-						type="text"
-						name="pc"
-						placeholder="Parola Chiave"
-					/>
-				</Form.Group>
-			</Col>
-			<Col md="4">
-				<Form.Group>
-					<Form.Label>Tipologia Annuncio</Form.Label>
-					<Form.Control as="select" name="ti">
-						{getTipologiaAnnuncioOptions(parameters)}
-					</Form.Control>
-				</Form.Group>
-			</Col>
-			<Col md="4">
-				<Form.Group>
-					<Form.Label>Tipologia Immobile</Form.Label>
-					<Form.Control as="select" name="tp">
-						{getTipologiaImmobileOptions(parameters).map(function (
-							tipologia
-						) {
-							return <option>{tipologia}</option>;
-						})}
-					</Form.Control>
-				</Form.Group>
-			</Col>
-			<Col md="6">
-				<Form.Group>
-					<Row>
-						<Form.Label>Prezzo Massimo: €</Form.Label>
-						<Form.Control
-							as="input"
-							type="text"
-							name="pmax"
-							value={prezzo}
-							onChange={(e) => setPrezzo(e.target.value)}
-						/>
-					</Row>
-					<Form.Control
-						type="range"
-						min="10000"
-						max="1000000"
-						value={prezzo}
-						name="pmax"
-						id="prezzo"
-						step="10000"
-						onChange={(e) => setPrezzo(e.target.value)}
-					/>
-				</Form.Group>
-			</Col>
-			<Col md="6">
-				<Form.Group>
-					<Row>
-						<Form.Label>Grandezza Minima: mq</Form.Label>
-						<Form.Control
-							as="input"
-							type="text"
-							name="gmin"
-							value={grandezza}
-							onChange={(e) => setGrandezza(e.target.value)}
-						/>
-					</Row>
-					<Form.Control
-						type="range"
-						min="10"
-						max="2000"
-						value={grandezza}
-						name="gmin"
-						id="grandezza"
-						step="10"
-						onChange={(e) => setGrandezza(e.target.value)}
-					/>
-				</Form.Group>
-			</Col>
-			<Col md="6">
-				<Button variant="primary" type="submit">
-					CERCA
-				</Button>
-			</Col>
-		</Form>
+		<div className="search-form-area">
+			<Form onSubmit={onSubmit}>
+				<Row className="search-form-top">
+					<Col md="4" className="search-form-field">
+						<Form.Group className="search-form-group">
+							<Form.Control
+								as="input"
+								type="text"
+								name="pc"
+								placeholder="Parola Chiave"
+								custom="true"
+								className="form-field"
+							/>
+						</Form.Group>
+					</Col>
+					<Col md="3" className="search-form-field">
+						<Form.Group className="search-form-group">
+							<Form.Control
+								as="select"
+								name="ti"
+								bsPrefix="form-field"
+							>
+								{getTipologiaAnnuncioOptions(parameters)}
+							</Form.Control>
+						</Form.Group>
+					</Col>
+					<Col md="3" className="search-form-field">
+						<Form.Group className="search-form-group">
+							<Form.Control
+								as="select"
+								name="tp"
+								bsPrefix="form-field"
+							>
+								{getTipologiaImmobileOptions(parameters).map(
+									function (tipologia) {
+										return <option>{tipologia}</option>;
+									}
+								)}
+							</Form.Control>
+						</Form.Group>
+					</Col>
+					<Col md="2" className="aa-single-advance-search">
+						<div className="form-search-btn">
+							<Button
+								variant="default"
+								bsPrefix="def-btn search-btn"
+								type="submit"
+							>
+								CERCA
+							</Button>
+						</div>
+					</Col>
+				</Row>
+				<Row className="search-form-bottom">
+					<Col md="6">
+						<Form.Group>
+							<Row className="form-range-input-row">
+								<Col md="6">
+									<Form.Label
+										custom="true"
+										className="form-range-label"
+									>
+										Prezzo Massimo: €
+									</Form.Label>
+								</Col>
+								<Col md="6">
+									<Form.Control
+										as="input"
+										type="text"
+										name="pmax"
+										custom="true"
+										className="form-range-input"
+										value={prezzo}
+										onChange={(e) =>
+											setPrezzo(e.target.value)
+										}
+									/>
+								</Col>
+							</Row>
+							<Form.Control
+								type="range"
+								min="10000"
+								max="1000000"
+								value={prezzo}
+								name="pmax"
+								id="prezzo"
+								step="10000"
+								onChange={(e) => setPrezzo(e.target.value)}
+							/>
+						</Form.Group>
+					</Col>
+					<Col md="6">
+						<Form.Group>
+							<Row className="form-range-input-row">
+								<Col md="6">
+									<Form.Label
+										custom="true"
+										className="form-range-label"
+									>
+										Grandezza Minima: mq
+									</Form.Label>
+								</Col>
+								<Col md="6">
+									<Form.Control
+										as="input"
+										type="text"
+										name="gmin"
+										custom="true"
+										className="form-range-input"
+										value={grandezza}
+										onChange={(e) =>
+											setGrandezza(e.target.value)
+										}
+									/>
+								</Col>
+							</Row>
+							<Form.Control
+								type="range"
+								min="10"
+								max="2000"
+								value={grandezza}
+								name="gmin"
+								id="grandezza"
+								step="10"
+								onChange={(e) => setGrandezza(e.target.value)}
+							/>
+						</Form.Group>
+					</Col>
+				</Row>
+			</Form>
+		</div>
 	);
 };
 

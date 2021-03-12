@@ -3,14 +3,32 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import newlogo from "../../styles/images/newlogo.png";
-import { Container, Col, Row, Button, Dropdown } from "react-bootstrap";
+import newlogo from "../../images/newlogo.png";
+import {
+	Container,
+	Col,
+	Row,
+	Button,
+	Dropdown,
+	DropdownButton,
+	OverlayTrigger,
+	Popover,
+} from "react-bootstrap";
 import * as userActions from "../../redux/actions/userActions";
 import * as tokenActions from "../../redux/actions/tokenActions";
 import * as cookieManager from "../../utils/cookieManager";
-import "../../styles/css/common.css";
+import LoginPage from "../loginpage/LoginPage";
 
+/**
+ * Effettua il render dell'Header dell'applicazione e gestisce il token e il login dell'utente
+ */
 class Header extends React.Component {
+	/**
+	 * Se il token è presente nello state e lo user non è presente,
+	 * Chiama la action getProfileByToken
+	 * @param {*} token
+	 * @param {*} user
+	 */
 	shouldGetProfile(token, user) {
 		if (
 			Object.entries(token).length !== 0 &&
@@ -22,26 +40,44 @@ class Header extends React.Component {
 		}
 	}
 
+	/**
+	 * se presente, salva il token contenuto nel cookie
+	 * Chiama il metodo shouldGetProfile
+	 */
 	componentDidMount() {
-		const { token, user, actions } = this.props;
+		const { token, user } = this.props;
 		const cookieToken = cookieManager.readCookie();
-		console.log("HEADER TOKEN: " + cookieToken);
 		if (cookieToken !== "NO COOKIE") {
 			this.props.actions.loginSuccess(cookieToken);
 		}
-
 		this.shouldGetProfile(token, user);
 	}
 
+	/**
+	 * Nel caso in cui sia stato effettuato il login, chiama il metodo shouldGetProfile
+	 * @param {*} previousProps
+	 */
 	componentDidUpdate(previousProps) {
 		if (this.props.token !== previousProps.token) {
 			this.shouldGetProfile(this.props.token, this.props.user);
 		}
 	}
 
+	/**
+	 *
+	 * @returns il popover con la loginPage
+	 */
+	popover = () => (
+		<Popover>
+			<Popover.Content>
+				<LoginPage />
+			</Popover.Content>
+		</Popover>
+	);
+
 	render() {
 		return (
-			<Container fluid className="header">
+			<Container fluid>
 				<Row>
 					<Col md="2">
 						<NavLink to="/" exact>
@@ -51,49 +87,45 @@ class Header extends React.Component {
 					<Col md="4"></Col>
 					<Col md="2">
 						<NavLink to="/about">
-							<Button variant="default" className="headerElement">
-								<div className="headerElementText">
-									CHI SIAMO
-								</div>
+							<Button variant="default" bsPrefix="header-btn">
+								<div>CHI SIAMO</div>
 							</Button>
 						</NavLink>
 					</Col>
 					<Col md="4">
 						{Object.entries(this.props.user).length === 0 ? (
-							<NavLink to="/login">
-								<Button
-									variant="default"
-									className="headerElement"
-								>
-									<div className="headerElementText">
-										LOGIN
-									</div>
+							<OverlayTrigger
+								trigger="click"
+								placement="bottom"
+								overlay={this.popover()}
+							>
+								<Button variant="default" bsPrefix="header-btn">
+									LOGIN
 								</Button>
-							</NavLink>
+							</OverlayTrigger>
 						) : (
 							<>
-								<Dropdown>
-									<Dropdown.Toggle
-										variant="default"
-										className="headerElement"
+								<DropdownButton
+									variant="default"
+									bsPrefix="header-btn"
+									title={"CIAO, " + this.props.user.nome}
+								>
+									<Dropdown.Item>
+										<NavLink to="/profile">
+											<div className="header-dropdown-item">
+												AREA PERSONALE{" "}
+											</div>
+										</NavLink>
+									</Dropdown.Item>
+									<Dropdown.Item
+										onClick={this.props.actions.logout}
 									>
-										<div className="headerElementText">
-											CIAO, {this.props.user.nome}
+										{" "}
+										<div className="header-dropdown-item">
+											LOGOUT{" "}
 										</div>
-									</Dropdown.Toggle>
-									<Dropdown.Menu>
-										<Dropdown.Item>
-											<NavLink to="/profile">
-												AREA PERSONALE
-											</NavLink>
-										</Dropdown.Item>
-										<Dropdown.Item
-											onClick={this.props.actions.logout}
-										>
-											LOGOUT
-										</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown>
+									</Dropdown.Item>
+								</DropdownButton>
 							</>
 						)}
 					</Col>

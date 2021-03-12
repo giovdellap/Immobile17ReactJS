@@ -66,7 +66,6 @@ export function changePassword(oldPw, newPw, token) {
 }
 
 export function getAppuntamenti(token) {
-	console.log("");
 	return fetch(baseUrl + "token/" + token + "/Utente/calendario")
 		.then(handleResponse)
 		.catch(handleError);

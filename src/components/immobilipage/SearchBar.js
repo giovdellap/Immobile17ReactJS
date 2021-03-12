@@ -2,10 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as immobiliActions from "../../redux/actions/immobiliActions";
-import { Form, Row, Col } from "react-bootstrap";
 import SearchForm from "./SearchForm";
 
+/**
+ * Classe deputata alla gestione della searchbar e al dispatch delle ricerche
+ */
 class SearchBar extends React.Component {
+	/**
+	 * Nel caso non sia presente una visualizzazione nello stato(accesso diretto alla pagina),
+	 * effettua il dispatch di ricerca con parametro "Vendita"
+	 */
 	componentDidMount() {
 		if (Object.keys(this.props.visualizzazione.params).length === 0) {
 			var parameters = {};
@@ -14,8 +20,11 @@ class SearchBar extends React.Component {
 		}
 	}
 
-	componentDidUpdate() {}
-
+	/**
+	 * listener della form
+	 * effettua il dispatch della action ricerca
+	 * @param {*} event
+	 */
 	handleSubmit = (event) => {
 		event.preventDefault();
 		var parameters = {};
@@ -34,7 +43,6 @@ class SearchBar extends React.Component {
 	};
 
 	render() {
-		console.log("PROVA: " + this.props.visualizzazione);
 		return (
 			<SearchForm
 				onSubmit={this.handleSubmit}

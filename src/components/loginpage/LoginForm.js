@@ -3,18 +3,24 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Form, Button, Col, Container, Row } from "react-bootstrap";
 
+/**
+ *
+ * @param error eventuale errore restituito dal server
+ * @param onSubmit listener del submit button
+ * @returns il rendering della login form
+ */
 const LoginForm = ({ error, onSubmit }) => {
 	return (
 		<Container fluid>
-			<Row className="formRow">
+			<Row>
 				<Form onSubmit={onSubmit}>
 					<Form.Group>
-						<Form.Label className="formLabel">email</Form.Label>
+						<Form.Label>Email</Form.Label>
 						<Form.Control
 							as="input"
 							type="email"
 							name="email"
-							className="formControl"
+							bsPrefix="form-field user-form"
 							required
 						/>
 					</Form.Group>
@@ -24,7 +30,7 @@ const LoginForm = ({ error, onSubmit }) => {
 							as="input"
 							type="text"
 							name="password"
-							className="formControl"
+							bsPrefix="form-field user-form"
 							required
 						/>
 					</Form.Group>
@@ -33,22 +39,21 @@ const LoginForm = ({ error, onSubmit }) => {
 						<Form.Text className="formError">{error}</Form.Text>
 					</Form.Group>
 					<Form.Row>
-						<Col sm="8">
+						<Col sm="6">
 							<Form.Group>
 								<Form.Check
 									as="input"
 									type="checkbox"
 									label="Ricordami"
 									name="rememberMe"
-									className="formCheckbox"
 								/>
 							</Form.Group>
 						</Col>
-						<Col sm="4">
+						<Col sm="6">
 							<Button
-								variant="primary"
+								variant="default"
 								type="submit"
-								className="formSubmitButton"
+								bsPrefix="def-btn login-btn"
 							>
 								LOGIN
 							</Button>
@@ -58,7 +63,7 @@ const LoginForm = ({ error, onSubmit }) => {
 			</Row>
 			<Row>
 				<Link to="/registration">
-					<div className="/registrationLink">REGISTRATI QUI</div>
+					<div className="aa-registration-link">REGISTRATI QUI</div>
 				</Link>
 			</Row>
 		</Container>

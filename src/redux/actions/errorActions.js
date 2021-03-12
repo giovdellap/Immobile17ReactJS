@@ -5,7 +5,6 @@ export function errorLogin(error) {
 }
 
 export function clearErrorState() {
-	console.log("errorActions clear error state");
 	return { type: types.CLEAR_ERROR_STATE };
 }
 
@@ -23,4 +22,8 @@ export function errorLoadImmobile(error) {
 
 export function errorChangePassword(error) {
 	return { type: types.ERROR_CHANGE_PASSWORD, error };
+}
+
+export function errorPrenotaAppuntamento(error) {
+	return { type: types.ERROR_PRENOTA_APPUNTAMENTO, error };
 }

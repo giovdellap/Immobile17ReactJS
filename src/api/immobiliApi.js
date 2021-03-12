@@ -9,7 +9,6 @@ export function getImmobiliHomepage() {
 
 export function ricerca(parameters) {
 	var pathURL = "";
-	console.log("PARAMS: " + parameters);
 	for (const property in parameters) {
 		pathURL = pathURL + "/" + property + "/" + parameters[property];
 	}
@@ -33,6 +32,39 @@ export function getImmobiliByID(ids) {
 
 export function getImmobile(id) {
 	return fetch(baseURL + "/Immobile/visualizza/" + id)
+		.then(handleResponse)
+		.catch(handleError);
+}
+
+export function getAppuntamentiLiberi(token, id, inizio, fine) {
+	return fetch(
+		baseURL +
+			"/token/" +
+			token +
+			"/Immobile/calendario/id/" +
+			id +
+			"/inizio/" +
+			inizio +
+			"/fine/" +
+			fine
+	)
+		.then(handleResponse)
+		.catch(handleError);
+}
+
+export function sendPrenotation(token, appuntamento, start, end) {
+	const formData = new FormData();
+	formData.append("idCl", appuntamento.idCliente);
+	formData.append("idIm", appuntamento.immobile);
+	formData.append("idAg", appuntamento.idAgente);
+	formData.append("inizio", appuntamento.inizio);
+	formData.append("fine", appuntamento.fine);
+	formData.append("agInizio", start.slice(0, 10));
+	formData.append("agFine", end.slice(0, 10));
+	return fetch(baseURL + "/token/" + token + "/Immobile/prenota", {
+		method: "POST",
+		body: formData,
+	})
 		.then(handleResponse)
 		.catch(handleError);
 }

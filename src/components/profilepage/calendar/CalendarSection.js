@@ -4,9 +4,13 @@ import { connect } from "react-redux";
 import { Button, Container, Row } from "react-bootstrap";
 import * as userActions from "../../../redux/actions/userActions";
 import * as immobiliActions from "../../../redux/actions/immobiliActions";
+import { getAppuntamentoFromId } from "../../../utils/calendarUtils";
 import PersonalCalendar from "./PersonalCalendar";
 import AppointmentCard from "./AppointmentCard";
 
+/**
+ * Classe per la visualizzazione del calendario utente e della scheda appuntamento
+ */
 class CalendarSection extends React.Component {
 	states = {
 		NONE: "NONE",
@@ -14,18 +18,52 @@ class CalendarSection extends React.Component {
 		SCHEDA: "SCHEDA",
 	};
 
+	/**
+	 * Lo stato viene inizializzato con due parametri:
+	 *  - show: booleano inizializzato a NONE
+	 *  - id: l'id dell'appuntamento da visualizzare
+	 * @param {*} props
+	 */
+	constructor(props) {
+		super(props);
+		this.state = { show: this.states.NONE, id: "" };
+	}
+
+	/**
+	 * Effettua il dispatch della action getAppuntamenti
+	 */
+	componentDidMount() {
+		this.props.actions.getAppuntamenti(this.props.user, this.props.token);
+	}
+
+	/**
+	 *
+	 * @returns un boolenano che indica se l'utente è un cliente o un agente immobiliare
+	 */
+	isCliente() {
+		return this.props.user.email.slice(-7) === "info.it";
+	}
+
+	/**
+	 *
+	 * @returns un booleano che indica se l'array appuntamenti dell'utente è vuoto
+	 */
 	appointmentsNotEmpty() {
-		console.log("VVV: " + this.props.user.appuntamenti);
 		return this.props.user.appuntamenti !== "undefined";
 	}
 
+	/**
+	 * Cointrolla che l'immobile dell'appuntamento scelto non sia presente nello stato
+	 * In caso positivo, effettua il dispatch della action loadImmobile per aggiungerlo allo stato
+	 * @param {*} appId
+	 */
 	loadImmobileIfNeeded(appId) {
-		var immobile = "";
-		this.props.user.appuntamenti.map(function (appuntamento) {
-			if (appuntamento.id === appId) immobile = appuntamento.immobile;
-		});
-		console.log("IMM: " + immobile);
-		if (typeof this.props.immobili !== "undefined") {
+		const immobile = getAppuntamentoFromId(
+			appId,
+			this.props.user.appuntamenti
+		).immobile;
+
+		if (typeof this.props.immobili === "undefined") {
 			this.props.actions.loadImmobile(immobile);
 		} else {
 			var ids = [];
@@ -38,21 +76,21 @@ class CalendarSection extends React.Component {
 		}
 	}
 
+	/**
+	 *
+	 * @returns il render della scheda appuntamento
+	 */
 	getAppointmentCard() {
-		console.log("getAppointment");
 		return this.props.user.appuntamenti.map((appuntamento) => {
 			if (appuntamento.id === this.state.id) {
-				console.log("primo if");
 				return this.props.immobili.map((immobile) => {
-					console.log("imm: "+immobile.id);
-					console.log("app: "+appuntamento.immobile);
 					if (immobile.id === appuntamento.immobile) {
-						console.log("nellif");
 						return (
 							<Container>
 								<Row>
 									<Button
-										variant="success"
+										variant="default"
+										bsPrefix="def-btn profile-page-btn"
 										onClick={this.onClickButton}
 									>
 										TORNA AL CALENDARIO
@@ -62,6 +100,7 @@ class CalendarSection extends React.Component {
 									<AppointmentCard
 										immobile={immobile}
 										appuntamento={appuntamento}
+										cliente={this.isCliente}
 									/>
 								</Row>
 							</Container>
@@ -72,18 +111,11 @@ class CalendarSection extends React.Component {
 		});
 	}
 
-	constructor(props) {
-		super(props);
-		this.state = { show: this.states.NONE, id: "" };
-	}
-
-	componentDidMount() {
-		this.props.actions.getAppuntamenti(this.props.user, this.props.token);
-		console.log(typeof this.props.user.appuntamenti);
-	}
-
+	/**
+	 * listener del bottone principale
+	 * Cambia state.show
+	 */
 	onClickButton = () => {
-		console.log("onclick stato: " + this.state.show);
 		switch (this.state.show) {
 			case this.states.NONE:
 				this.setState({ show: this.states.CALENDAR });
@@ -99,19 +131,25 @@ class CalendarSection extends React.Component {
 		}
 	};
 
+	/**
+	 * listener degli appuntamenti
+	 * @param {*} id id dell'appuntamento
+	 */
 	onClickAppuntamento = (id) => {
 		this.loadImmobileIfNeeded(id);
 		this.setState({ show: this.states.SCHEDA, id: id });
 	};
 
 	render() {
-		console.log("QUIQUOQUA " + this.state);
 		switch (this.state.show) {
 			case this.states.NONE:
 				if (this.appointmentsNotEmpty()) {
 					return (
-						<Button variant="success" onClick={this.onClickButton}>
-							{console.log("GEPPETTO")}
+						<Button
+							variant="default"
+							bsPrefix="def-btn profile-page-btn"
+							onClick={this.onClickButton}
+						>
 							VISUALIZZA APPUNTAMENTI
 						</Button>
 					);
@@ -119,8 +157,11 @@ class CalendarSection extends React.Component {
 					return (
 						<Container>
 							<Row>
-								{console.log("PIPPOZZO")}
-								<Button variant="secondary" disabled>
+								<Button
+									variant="default"
+									bsPrefix="def-btn profile-page-btn"
+									disabled
+								>
 									VISUALIZZA APPUNTAMENTI
 								</Button>
 							</Row>
@@ -129,35 +170,31 @@ class CalendarSection extends React.Component {
 					);
 				}
 			case this.states.CALENDAR:
-				console.log("CCCP");
 				return (
 					<Container>
 						<Row>
-							{console.log("UNOOOO")}
 							<Button
-								variant="success"
+								variant="default"
+								bsPrefix="def-btn profile-page-btn"
 								onClick={this.onClickButton}
 							>
 								VISUALIZZA APPUNTAMENTI
 							</Button>
 						</Row>
 						<Row>
-							{console.log(
-								"GONEGONE: " + this.props.user.appuntamenti
-							)}
-							<PersonalCalendar
-								appuntamenti={this.props.user.appuntamenti}
-								onClick={this.onClickAppuntamento}
-							/>
+							<div className="personal-calendar">
+								<PersonalCalendar
+									appuntamenti={this.props.user.appuntamenti}
+									onClick={this.onClickAppuntamento}
+								/>
+							</div>
 						</Row>
 					</Container>
 				);
 			case this.states.SCHEDA:
-				console.log("quiquiqui");
 				return this.getAppointmentCard();
 
 			default:
-				console.log("STATO ASSASSINO: " + this.state.show);
 				return <></>;
 		}
 	}

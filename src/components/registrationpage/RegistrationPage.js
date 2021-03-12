@@ -7,14 +7,19 @@ import * as userActions from "../../redux/actions/userActions";
 import * as errorActions from "../../redux/actions/errorActions";
 import RegistrationForm from "./RegistrationForm";
 
+/**
+ * Classe per la registrazione dell'utente
+ */
 class RegistrationPage extends React.Component {
-	componentDidMount() {}
-
+	/**
+	 * listener della form
+	 * Effettua il dispatch della action registration con le informazioni dell'utente
+	 * @param {*} event
+	 */
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const formData = new FormData(event.target);
 		const formDataObj = Object.fromEntries(formData.entries());
-		console.log(formDataObj);
 		this.props.actions.registration(formDataObj);
 	};
 

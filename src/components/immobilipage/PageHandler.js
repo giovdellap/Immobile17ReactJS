@@ -1,7 +1,18 @@
 import React from "react";
 import { Pagination } from "react-bootstrap";
 
+/**
+ *
+ * @param active pagina attuale
+ * @param pages numero di pagine totali
+ * @param onClick listener
+ * @returns il rendering del PageHandler
+ */
 const PageHandler = ({ active, pages, onClick }) => {
+	/**
+	 *
+	 * @returns il pagehandler
+	 */
 	function getPaginationItems() {
 		var pageRange = 0;
 		var ellipsis = "";
@@ -39,6 +50,13 @@ const PageHandler = ({ active, pages, onClick }) => {
 		return paginationItemsMaker(ellipsis, first, last);
 	}
 
+	/**
+	 *
+	 * @param {*} ellipsis la posizione dell'ellipsis
+	 * @param {*} first la prima pagina da visualizzare
+	 * @param {*} last l'ultima pagina da visualizzare
+	 * @returns il page Handler
+	 */
 	function paginationItemsMaker(ellipsis, first, last) {
 		var toReturn = [];
 		if (ellipsis === "BEFORE" || ellipsis === "BOTH") {
@@ -50,6 +68,7 @@ const PageHandler = ({ active, pages, onClick }) => {
 					active={i === active}
 					onClick={() => onClick(i)}
 					key={i}
+					custom="true"
 				>
 					{i}
 				</Pagination.Item>
@@ -62,7 +81,7 @@ const PageHandler = ({ active, pages, onClick }) => {
 	}
 
 	return (
-		<Pagination>
+		<Pagination className="align-pagination">
 			<Pagination.First
 				disabled={active === 1}
 				onClick={() => onClick(1)}
