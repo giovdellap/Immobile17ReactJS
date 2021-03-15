@@ -72,6 +72,7 @@ img {
 	background-color: #fff;
 }
 
+
 .map-section {
 	width: 100%;
 	height: 420px;
@@ -652,7 +653,21 @@ img {
 	margin: 50px auto 30px auto;
 }
 
+.calendar-button-row {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+
 .aa-properties {
 	position: relative;
 	display: block;
+}
+
+.error-string {
+	color: #bf2f19;
+}
+
+.prenotation-ok {
+	text-align: center;
 }

@@ -20,6 +20,12 @@ h2 {
 	color: #59abe3;
 }
 
+.def-btn:disabled {
+	background-color: #7f7f7f;
+	color: #bf2f19;
+}
+
+
 .header-btn {
 	color: #59abe3;
 	background-color: #fff;

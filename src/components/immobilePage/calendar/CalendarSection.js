@@ -57,12 +57,19 @@ class CalendarSection extends React.Component {
 	 * @returns un booleano
 	 */
 	canCheckForUpdates(prevProps) {
+		console.log("UNO: " + Object.entries(this.props.user).length !== 0);
+		console.log("DUE: " + this.props.user.appuntamenti);
+		console.log("TRE: " + Object.entries(prevProps.user).length !== 0);
+		console.log("QUATTRO: " + prevProps.user.appuntamenti);
 		return (
-			this.props.user !== "undefined" &&
-			this.props.user.appuntamenti !== "undefined" &&
-			prevProps.user !== "undefined" &&
-			prevProps.user.appuntamenti !== "undefined"
+			Object.entries(this.props.user).length !== 0 &&
+			Object.entries(prevProps.user).length !== 0
 		);
+	}
+
+	loginOK() {
+		console.log("CATAFRATTOMI " + Object.entries(this.props.user).length);
+		return Object.entries(this.props.user).length !== 0;
 	}
 
 	/**
@@ -126,25 +133,33 @@ class CalendarSection extends React.Component {
 		return (
 			<Container fluid>
 				<Row>
-					<Button
-						disabled={
-							this.props.token === "undefined" ||
-							this.state.prenotato === true
-						}
-						onClick={this.onClickButton.bind(this)}
-						bsPrefix="def-btn"
-					>
-						PRENOTA UN APPUNTAMENTO
-					</Button>
+					<div className="calendar-button-row">
+						<Button
+							disabled={
+								!this.loginOK() || this.state.prenotato === true
+									? true
+									: false
+							}
+							onClick={this.onClickButton.bind(this)}
+							bsPrefix="def-btn"
+						>
+							PRENOTA UN APPUNTAMENTO
+						</Button>
+					</div>
 				</Row>
 				<Row>
-					{this.props.token === "undefined" ? (
-						<h5>Effettua il login per prenotare un appuntamento</h5>
+					{!this.loginOK() ? (
+						<h5>
+							<div className="error-string">
+								Effettua il login per prenotare un appuntamento
+							</div>
+						</h5>
 					) : (
 						<></>
 					)}
 					{this.state.show === true &&
-					this.state.prenotato === false ? (
+					this.state.prenotato === false &&
+					this.loginOK() ? (
 						<PrenotationCalendar
 							changeWeek={this.onClickChangeWeek}
 							today={this.onClickToday}
@@ -156,7 +171,9 @@ class CalendarSection extends React.Component {
 						<></>
 					)}
 					{this.state.prenotato === true ? (
-						<h5>PRENOTAZIONE EFFETTUATA CON SUCCESSO</h5>
+						<div className="prenotation-ok">
+							<h2>PRENOTAZIONE EFFETTUATA CON SUCCESSO</h2>
+						</div>
 					) : (
 						<></>
 					)}
