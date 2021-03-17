@@ -28,7 +28,7 @@ const LoginForm = ({ error, onSubmit }) => {
 						<Form.Label className="formLabel">Password</Form.Label>
 						<Form.Control
 							as="input"
-							type="text"
+							type="password"
 							name="password"
 							bsPrefix="form-field user-form"
 							required
